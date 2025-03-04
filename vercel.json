@@ -1,14 +1,16 @@
 {
   "version": 2,
+  "builds": [
+    {
+      "src": "api/index.go",
+      "use": "@vercel/go"
+    }
+  ],
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "/api/index.go"
+      "dest": "/api/index.go",
+      "methods": ["GET", "POST", "PUT", "PATCH", "DELETE"]
     }
-  ],
-  "functions": {
-    "api/**": {
-      "maxDuration": 20
-    }
-  }
+  ]
 }
