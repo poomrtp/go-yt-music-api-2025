@@ -39,7 +39,6 @@ func getJWTSecret() string {
 	}
 
 	secret := os.Getenv("JWT_SECRET_KEY")
-	fmt.Printf("[INFO] Load secret: %v\n", secret)
 	if secret == "" {
 		fmt.Printf("[ERROR] JWT_SECRET_KEY environment variable is not set")
 	}

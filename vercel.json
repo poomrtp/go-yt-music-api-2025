@@ -2,11 +2,7 @@
   "version": 2,
   "routes": [
     {
-      "src": "/favicon.ico",
-      "status": 204
-    },
-    {
-      "src": "/(.*)",
+      "src": "/api/(.*)",
       "dest": "/api/index.go"
     }
   ],
