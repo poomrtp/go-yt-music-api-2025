@@ -10,8 +10,8 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/recover"
 	"github.com/joho/godotenv"
 
-	"github.com/poomrtp/go-yt-music/internal/handlers"
-	"github.com/poomrtp/go-yt-music/internal/services"
+	"github.com/poomrtp/go-yt-music/pkg/handlers"
+	"github.com/poomrtp/go-yt-music/pkg/services"
 )
 
 func main() {

@@ -2,8 +2,8 @@ package handlers
 
 import (
 	"github.com/gofiber/fiber/v2"
-	"github.com/poomrtp/go-yt-music/internal/middleware"
-	"github.com/poomrtp/go-yt-music/internal/services"
+	"github.com/poomrtp/go-yt-music/pkg/middleware"
+	"github.com/poomrtp/go-yt-music/pkg/services"
 )
 
 type YTMusicHandler struct {

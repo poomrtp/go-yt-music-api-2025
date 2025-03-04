@@ -8,8 +8,8 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/joho/godotenv"
-	"github.com/poomrtp/go-yt-music/internal/handlers"
-	"github.com/poomrtp/go-yt-music/internal/services"
+	"github.com/poomrtp/go-yt-music/pkg/handlers"
+	"github.com/poomrtp/go-yt-music/pkg/services"
 )
 
 // Handler - handles serverless function requests
