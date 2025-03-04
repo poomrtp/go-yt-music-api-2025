@@ -32,9 +32,10 @@ func init() {
 }
 
 func getJWTSecret() string {
-	err := godotenv.Load()
-	if err != nil {
-		fmt.Printf("[ERROR] Error loading .env file: %v\n", err)
+	if os.Getenv("JWT_SECRET_KEY") == "" {
+		if err := godotenv.Load(); err != nil {
+			fmt.Printf("[ERROR] Error loading .env file: %v\n", err)
+		}
 	}
 
 	secret := os.Getenv("JWT_SECRET_KEY")

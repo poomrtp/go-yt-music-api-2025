@@ -7,14 +7,13 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
-	"github.com/joho/godotenv"
+
 	"github.com/poomrtp/go-yt-music/pkg/handlers"
 	"github.com/poomrtp/go-yt-music/pkg/services"
 )
 
 // Handler - handles serverless function requests
 func Handler(w http.ResponseWriter, r *http.Request) {
-	godotenv.Load()
 	app := fiber.New()
 
 	// Setup CORS
