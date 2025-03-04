@@ -19,6 +19,9 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	// Setup CORS
 	app.Use(cors.New())
 
+	apiHandler := handlers.NewAPIHandler()
+	apiHandler.SetupRoutes(app)
+
 	// Initialize services
 	ytMusicService := services.NewYTMusicService()
 
