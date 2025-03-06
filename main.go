@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"net/http"
 	"os"
 
 	"github.com/gofiber/fiber/v2"
@@ -33,4 +34,27 @@ func main() {
 	ytMusicHandler.SetupRoutes(api)
 
 	app.Listen(fmt.Sprintf(":%s", os.Getenv("PORT")))
+}
+
+// Handler is the exported function that Vercel will use as the entry point
+func Handler(w http.ResponseWriter, r *http.Request) {
+	godotenv.Load()
+	app := fiber.New()
+
+	app.Use(recover.New())
+	app.Use(logger.New(logger.Config{
+		Format: "[${time}] ${status} - ${latency} ${method} ${path}\n",
+	}))
+	app.Use(cors.New())
+	api := app.Group("/api")
+
+	apiHandler := handlers.NewAPIHandler()
+	apiHandler.SetupRoutes(api)
+
+	ytMusicService := services.NewYTMusicService()
+	ytMusicHandler := handlers.NewYTMusicHandler(ytMusicService)
+	ytMusicHandler.SetupRoutes(api)
+
+	// Use Fiber's handler to serve the request
+	app.Handler()
 }
