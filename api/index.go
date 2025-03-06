@@ -3,7 +3,6 @@ package handler
 import (
 	"fmt"
 	"net/http"
-	"os"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
@@ -33,5 +32,5 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	ytMusicHandler := handlers.NewYTMusicHandler(ytMusicService)
 	ytMusicHandler.SetupRoutes(api)
 
-	app.Listen(fmt.Sprintf(":%s", os.Getenv("PORT")))
+	app.Handler()
 }
