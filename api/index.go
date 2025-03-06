@@ -6,6 +6,7 @@ import (
 	"os"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/logger"
 
 	"github.com/poomrtp/go-yt-music/pkg/handlers"
@@ -20,15 +21,17 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	}))
 	fmt.Printf("[INFO] called handler")
 
-	apiHandler := handlers.NewAPIHandler()
-	apiHandler.SetupRoutes(app)
+	app.Use(cors.New())
+	api := app.Group("/api")
 
+	apiHandler := handlers.NewAPIHandler()
+	apiHandler.SetupRoutes(api)
 	// Initialize services
 	ytMusicService := services.NewYTMusicService()
 
 	// Setup routes
 	ytMusicHandler := handlers.NewYTMusicHandler(ytMusicService)
-	ytMusicHandler.SetupRoutes(app)
+	ytMusicHandler.SetupRoutes(api)
 
 	app.Listen(fmt.Sprintf(":%s", os.Getenv("PORT")))
 }
