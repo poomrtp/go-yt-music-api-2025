@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/adaptor"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/logger"
 
@@ -12,8 +13,15 @@ import (
 	"github.com/poomrtp/go-yt-music/pkg/services"
 )
 
-// Handler - handles serverless function requests
 func Handler(w http.ResponseWriter, r *http.Request) {
+	// This is needed to set the proper request path in `*fiber.Ctx`
+	r.RequestURI = r.URL.String()
+
+	handler().ServeHTTP(w, r)
+}
+
+// Handler - handles serverless function requests
+func handler() http.HandlerFunc {
 	app := fiber.New()
 	app.Use(logger.New(logger.Config{
 		Format: "[${time}] ${status} - ${latency} ${method} ${path}\n",
@@ -31,4 +39,6 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	// Setup routes
 	ytMusicHandler := handlers.NewYTMusicHandler(ytMusicService)
 	ytMusicHandler.SetupRoutes(api)
+
+	return adaptor.FiberApp(app)
 }
