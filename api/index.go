@@ -6,7 +6,7 @@ import (
 	"os"
 
 	"github.com/gofiber/fiber/v2"
-	"github.com/gofiber/fiber/v2/middleware/cors"
+	"github.com/gofiber/fiber/v2/middleware/logger"
 
 	"github.com/poomrtp/go-yt-music/pkg/handlers"
 	"github.com/poomrtp/go-yt-music/pkg/services"
@@ -15,9 +15,10 @@ import (
 // Handler - handles serverless function requests
 func Handler(w http.ResponseWriter, r *http.Request) {
 	app := fiber.New()
-
-	// Setup CORS
-	app.Use(cors.New())
+	app.Use(logger.New(logger.Config{
+		Format: "[${time}] ${status} - ${latency} ${method} ${path}\n",
+	}))
+	fmt.Printf("[INFO] called handler")
 
 	apiHandler := handlers.NewAPIHandler()
 	apiHandler.SetupRoutes(app)
