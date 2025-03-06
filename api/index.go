@@ -31,6 +31,4 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	// Setup routes
 	ytMusicHandler := handlers.NewYTMusicHandler(ytMusicService)
 	ytMusicHandler.SetupRoutes(api)
-
-	app.Handler()
 }
